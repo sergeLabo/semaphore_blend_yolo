@@ -1,6 +1,6 @@
 # semaphore blend yolo
 
-Un sémaphore a été construit dans le monde réél avec des pièces réalisées sur Imprimnte 3D.
+Un sémaphore a été construit dans le monde réél avec des pièces réalisées sur Imprimante 3D.
 Ce projet crée ce même sémaphore dans le Blender Game Engine donc dans un monde virtuel. Ce sémaphore est parfait.
 Cela permet d'obtenir 60 000 images pour l'apprentissage et le test de l'intelligence de Yolo Darknet V3.
 Le BGE permet de faire varier les éclairage et leur couleurs, de le faire bouger et donner du random sue les angles des bras.
@@ -19,11 +19,11 @@ Réalisé avec:
 
 ### La documentation sur ressources.labomedia.org
 
-[Un sémaphore reconnu avec Yolo Darknet](https://ressources.labomedia.org/2019_04/yolo_darknet_sur_un_portable_optimus)
+[Un vrai sémaphore reconnu avec Yolo Darknet](https://ressources.labomedia.org/2019_04/yolo_darknet_avec_un_vrai_semaphore)
 
-### Dossiers images
+### Dossiers des images
 
-Les images ne sont pas dans ce dépot
+Les images ne sont pas dans ce dépôt.
 
 ### Installation
 
@@ -52,10 +52,10 @@ sudo apt install blender
 
 ### Utilisation
 
-Important: Ne pas déplacer ou aggrandir la fenêtre de Blender pendant que les
+Important: Ne pas déplacer ou agrandir la fenêtre de Blender pendant que les
 images défilent.
 
-#### Controle de la pertinence des fichiers txt
+#### Contrôle de la pertinence des fichiers txt
 Avec le script control.py du dossier control
 
 ### Merci à:
