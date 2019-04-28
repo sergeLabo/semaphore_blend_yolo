@@ -77,7 +77,7 @@ while loop:
         img_big = cv2.resize(img, (1280, 1280), interpolation=cv2.INTER_AREA)
         cv2.imshow("image", img_big)
         n = pngs[a].split("/media/data/3D/projets/semaphore_blend_yolo/shot/")
-        name = "/media/data/3D/projets/semaphore_blend_yolo/shot_rect/" + n[1][2:-4] + "_rect.png"
+        name = "/media/data/3D/projets/semaphore_blend_yolo/control/shot_rect/" + n[1][2:-4] + "_rect.png"
         print(name)
         cv2.imwrite(name, img_big)
 

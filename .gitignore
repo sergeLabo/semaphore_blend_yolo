@@ -6,7 +6,9 @@
 # divers
 old/
 shot/
+shot_rect/
 video/
+photo/
 
 # Blender
 *.blend1
