@@ -3,9 +3,9 @@
 Un sémaphore a été construit dans le monde réél avec des pièces réalisées sur Imprimante 3D.
 Ce projet crée ce même sémaphore dans le Blender Game Engine donc dans un monde virtuel. Ce sémaphore est parfait.
 Cela permet d'obtenir 60 000 images pour l'apprentissage et le test de l'intelligence de Yolo Darknet V3.
-Le BGE permet de faire varier les éclairage et leur couleurs, de le faire bouger et donner du random sue les angles des bras.
+Le BGE permet de faire varier les éclairage et leur couleurs, de le faire bouger et donner du random sur les angles des bras.
 
-Un shot:
+
 <img src="/doc/shot_106_y.png" width="300" height="300">
 
 ### Contexte
