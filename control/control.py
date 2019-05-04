@@ -33,7 +33,7 @@ def cvDrawBoxes(img, parts):
     w = float(parts[3]) * 640
     h = float(parts[4]) * 640
 
-    print("Centre:", cx, cy)  # 255 
+    #print("Centre:", cx, cy)  # 255 
     
     xmin = int(cx - w/2)
     ymin = int(cy - h/2)
@@ -43,7 +43,7 @@ def cvDrawBoxes(img, parts):
     pt1 = (xmin, ymin)
     pt2 = (xmax, ymax)
     
-    print("pt1", pt1, "pt2", pt2)
+    #print("pt1", pt1, "pt2", pt2)
     
     cv2.rectangle(img, pt1, pt2, (0, 255, 0), 1)
     return img
@@ -52,7 +52,7 @@ def cvDrawBoxes(img, parts):
 def without_letter(x):
     y = x[56:-6]
     y = textwrap.fill(str(y), 4)
-    print(y)
+    #print(y)
     return y
 
 rep = "/media/data/3D/projets/semaphore_blend_yolo/shot/"
@@ -74,22 +74,25 @@ while loop:
         
     if parts:
         img = cvDrawBoxes(img, parts)
-        img_big = cv2.resize(img, (1280, 1280), interpolation=cv2.INTER_AREA)
+        img_big = cv2.resize(img, (1020, 1020), interpolation=cv2.INTER_AREA)
         cv2.imshow("image", img_big)
         n = pngs[a].split("/media/data/3D/projets/semaphore_blend_yolo/shot/")
-        name = "/media/data/3D/projets/semaphore_blend_yolo/control/shot_rect/" + n[1][2:-4] + "_rect.png"
-        print(name)
+        # 185_s.png ou 186_space.png
+        if "pace" in n[1][2:-4]:
+            m = n[1][6:-4]
+        else:
+            m = n[1][2:-4]
+        name = "/media/data/3D/projets/semaphore_blend_yolo/control/shot_rect/" + m + "_rect.png"
+        print(m)
         cv2.imwrite(name, img_big)
 
     if time.time() - t > 1:
-        t = time.time()
         a += 1
-    # Echap, attente, space
-    k = cv2.waitKey(1000)
-    if k == 32:
-        a += 1
-        if a == len(pngs):
+        if a == len(pngs) - 1:
             loop = 0
+            
+    # Echap, attente, space
+    k = cv2.waitKey(1)
     if k == 27:
         loop = 0
 

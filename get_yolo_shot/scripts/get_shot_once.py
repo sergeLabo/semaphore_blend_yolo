@@ -164,7 +164,11 @@ def get_cube_obj():
     for i in range(4):
         gl.coin.append(all_obj['Cube.0' + str(10 + i)])    
 
-
+    gl.cube_14 = all_obj['Cube.014']
+    gl.cube_15 = all_obj['Cube.015']
+    gl.cube_16 = all_obj['Cube.016']
+    
+    
 def get_lamp_obj():
     """
     'NORMAL', 'SPOT', 'SUN', '__class__', '__contains__', '__delattr__',
@@ -202,7 +206,7 @@ def get_lamp_obj():
     """
     all_obj = blendergetobject.get_all_objects()
     gl.sun = []
-    for i in range(3):
+    for i in range(4):
         gl.sun.append(all_obj['Sun.00' + str(i)])
 
     # Energy 0.11000001430511475 Color [1.0, 1.0, 1.0]

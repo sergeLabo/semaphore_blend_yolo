@@ -59,8 +59,21 @@ def main():
         gl.rect = get_semaphore_world_englobage()
     if gl.tempoDict['shot'].tempo == gl.make_shot - 8:        
         gl.centre_dimension_relatif = centre_dimension_rect_relatif(gl.rect)
-    if gl.tempoDict['shot'].tempo == gl.make_shot - 6:       
+
+    if gl.tempoDict['shot'].tempo == gl.make_shot - 6:
+        
+        # #cube_14 = get_M_position_in_cam_output_in_pixels(gl.cube_14.worldPosition)
+        # #print("cube_14", cube_14)
+
+        # #cube_15 = get_M_position_in_cam_output_in_pixels(gl.cube_15.worldPosition)
+        # #print("cube_15", cube_15)  # [699, -62] au lieu de 640, 0
+
+        # #cube_16 = get_M_position_in_cam_output_in_pixels(gl.cube_16.worldPosition)
+        # #print("cube_16", cube_16)  #
+        
+        #gl.cube_test.worldPosition = (test[0], 11, test[0])    
         save_txt_file(gl.centre_dimension_relatif)
+        
     if gl.tempoDict['shot'].tempo == gl.make_shot:
         make_shot()
 
@@ -71,21 +84,56 @@ def main():
     gl.tempoDict.update()
 
 
+def get_M_position_in_cam_output_in_pixels(M):
+    """M = [M[0], M[1], M[2]]
+    La vue est carrée:
+    Origine         (0, 0)   pour A(-7.92, 13.59, 7.92)
+    Coin droit haut (640,0)  pour B( 7.92, 13.59, 7.92)
+
+    Si yM = 13.59
+    x_cam = demi * (1 + (xM/xB))
+    y_cam = demi * (1 - (zM/xB))
+    
+    """
+
+    demi = gl.size / 2
+    xB = 7.92
+    yB = 13.59
+    tg_beta = xB / yB
+
+    # Coordonnées de M
+    xM, yM, zM = M[0], M[1], M[2]
+
+    # B_prime = point le plus à droite dans la vue caméra
+    xB_prime = yM * tg_beta
+
+    # Si yM = 13.59
+    x_cam = demi * (1 + (xM/xB_prime))
+    y_cam = demi * (1 - (zM/xB_prime))
+
+    if x_cam < 0: x_cam = 0
+    if x_cam > 640: x_cam = 640
+    if y_cam < 0: y_cam = 0
+    if y_cam > 640: y_cam = 640
+    
+    return [int(x_cam), int(y_cam)]
+
+    
 def set_sun_color_energy():
 
     # 0.110 de face
     gl.sun[0].energy = uniform(0.05, 0.2)
     # 1.34 main
-    gl.sun[1].energy = uniform(0.8, 1.8)
+    gl.sun[1].energy = uniform(1.5, 2.2)
     # 1 lampe back
     gl.sun[2].energy = uniform(0.5, 1.3)
-
+    # 1 lampe back
+    gl.sun[3].energy = uniform(0.5, 1.3)
+    
     color = uniform(0.8, 1), uniform(0.5, 1), uniform(0.8, 1)
     for i in range(3):
         gl.sun[i].color = color
-        
-    # #print(gl.sun[0].energy, gl.sun[1].energy, gl.sun[2].energy)
-    # #print(gl.sun[0].color)
+    
     
 def save_txt_file(centre_dimension_relatif):
     """<object-class> <x> <y> <width> <height>
@@ -270,34 +318,7 @@ def crop_rectangle(cdr):
             print("Crop")
     return cdr
 
-    
-def get_M_position_in_cam_output_in_pixels(M):
-    """M = [M[0], M[1], M[2]]
-    La vue est carrée:
-    Origine         (0, 0)   pour A(-7.84, 13.59, 7.84)
-    Coin droit haut (640,0)  pour B( 7.84, 13.59, 7.84)
-    tg_beta = 0,57689
-    
-    """
-
-    demi = gl.size / 2
-    xB = 7.84
-    yB = 13.59
-    tg_beta = xB / yB
-    
-    xM, yM, zM = M[0], M[1], M[2]
-
-    # Si yM = 13.59
-    x_cam = int(demi * (1 + (xM/xB)))
-    y_cam = int(demi * (1 - (zM/xB)))
-
-    # Si plus reculé
-    x_cam = x_cam - (yM - 13.59)*tg_beta
-    y_cam = y_cam - (yM - 13.59)*tg_beta
-    
-    return [x_cam, y_cam]
-
-    
+        
 def get_angles(chars):
     try:
         angles = gl.lettre_table[chars]
@@ -364,3 +385,14 @@ def video_refresh():
 def end():
     if gl.numero == gl.nombre_shot_total:
         gl.endGame()
+
+"""    # Si yM = 13.59
+    x_cam = demi * (1 + (xM/xB))
+    y_cam = demi * (1 - (zM/xB))
+
+    # Si plus reculé ou plus avancé
+    tg_beta = (xM**2 + zM**2)**0.5 / yM
+
+    x_cam = x_cam - (yM - 13.59)*tg_beta
+    y_cam = y_cam - (yM - 13.59)*tg_beta
+    """
