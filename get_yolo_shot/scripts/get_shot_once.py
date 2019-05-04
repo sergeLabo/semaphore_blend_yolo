@@ -108,8 +108,6 @@ def set_variable():
 
     # Déplacement du semaphore
     gl.static = gl.conf['blend']['static']
-    gl.rotation_semaphore = gl.conf['blend']['rotation_semaphore']
-    gl.glissement_semaphore = gl.conf['blend']['glissement_semaphore']
 
 
 def create_directories():

@@ -191,7 +191,6 @@ def scale_semaphore():
 
 
 def rotation_semaphore():
-    """gl.rotation_semaphore de global.ini non utilisé"""
 
     rot = gl.rotation_semaphore_variation
     # angle en radians
