@@ -19,7 +19,7 @@ Réalisé avec:
 
 ### La documentation sur ressources.labomedia.org
 
-[Un vrai sémaphore reconnu avec Yolo Darknet](https://ressources.labomedia.org/2019_04/yolo_darknet_avec_un_vrai_semaphore)
+[Un vrai sémaphore reconnu avec Yolo Darknet](https://ressources.labomedia.org/y/yolo_darknet_avec_un_vrai_semaphore)
 
 ### Dossiers des images
 
