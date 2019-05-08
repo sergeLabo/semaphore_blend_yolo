@@ -58,6 +58,19 @@ images défilent.
 #### Contrôle de la pertinence des fichiers txt
 Avec le script control.py du dossier control
 
+#### Conversion en jpg
+
+Avec convert_png_to_jpg.py, en modifiant les chemins.
+
+Le calculateur avec carte 1060 GTX plante au bout d'une heure avec des png.
+
+#### Ajout d'un flou convolutionnel
+
+Avec blur_jpg.py, en modifiant les chemins.
+
+Le flou est très important, des images parfaites ne conviennent pas du tout pour  l'apprentissage.
+
+
 ### Merci à:
 
 * [La Labomedia](https://ressources.labomedia.org)
