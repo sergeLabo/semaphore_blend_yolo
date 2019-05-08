@@ -5,8 +5,9 @@ Ce projet crée ce même sémaphore dans le Blender Game Engine donc dans un mon
 Cela permet d'obtenir 60 000 images pour l'apprentissage et le test de l'intelligence de Yolo Darknet V3.
 Le BGE permet de faire varier les éclairage et leur couleurs, de le faire bouger et donner du random sur les angles des bras.
 
-
-<img src="/doc/shot_106_y.png" width="300" height="300">
+Par contre, le BGE ne permet une sortie d'image qu'en png. Il faut les convertir en jpg et les flouter en convoltionnel.
+ 
+<img src="/doc/shot_106_y.png" width="500" height="500">
 
 ### Contexte
 
