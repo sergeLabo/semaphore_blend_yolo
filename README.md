@@ -5,9 +5,11 @@ Ce projet crée ce même sémaphore dans le Blender Game Engine donc dans un mon
 Cela permet d'obtenir 60 000 images pour l'apprentissage et le test de l'intelligence de Yolo Darknet V3.
 Le BGE permet de faire varier les éclairage et leur couleurs, de le faire bouger et donner du random sur les angles des bras.
 
-Par contre, le BGE ne permet une sortie d'image qu'en png. Il faut les convertir en jpg et les flouter en convoltionnel.
+Par contre, le BGE ne permet une sortie d'image qu'en png. Il faut les convertir en jpg et les flouter en convolutionnel.
  
 <img src="/doc/shot_106_y.png" width="500" height="500">
+<img src="chart_avec_blur_sub_16_9000.png" width="500" height="500">
+
 
 ### Contexte
 
@@ -69,7 +71,7 @@ Le calculateur avec carte 1060 GTX plante au bout d'une heure avec des png.
 
 Avec blur_jpg.py, en modifiant les chemins.
 
-Le flou est très important, des images parfaites ne conviennent pas du tout pour  l'apprentissage.
+Le flou est important (0 à 5), enregistrées en jpg 90%. Des images parfaites ne conviennent pas du tout pour l'apprentissage.
 
 
 ### Merci à:
