@@ -14,10 +14,13 @@ Par contre, le BGE ne permet une sortie d'image qu'en png. Il faut les convertir
 
 Réalisé avec:
 
-* Debian 10 Buster
+* Debian 10 Buster et Xunbuntu 18.04 pour CUDA
 * Blender 2.79b
-* python3.7
-
+* python 3.7
+* opencv 3.4.5.20
+* cuda-10-0
+* libcudnn7=7.4.1.5-1+cuda10.0
+* yolo darknet v3
 
 ### La documentation sur ressources.labomedia.org
 
@@ -29,7 +32,7 @@ Les images ne sont pas dans ce dépôt.
 
 ### Installation
 
-### pip3
+#### pip3
 
 ~~~text
 sudo apt install python3-pip
@@ -52,13 +55,17 @@ sudo pip3 install --upgrade git+https://github.com/sergeLabo/pymultilame.git#egg
 sudo apt install blender
 ~~~
 
+#### Xubunutu 18.04 et CUDA 10
+
+[Installation de CUDA](https://ressources.labomedia.org/y/yolo_darknet_sur_un_portable_optimus)
+
 ### Utilisation
 
 Important: Ne pas déplacer ou agrandir la fenêtre de Blender pendant que les
 images défilent.
 
 #### Contrôle de la pertinence des fichiers txt
-Avec le script control.py du dossier control
+Avec le script control.py du dossier control, en modifiant les chemins.
 
 #### Conversion en jpg
 
