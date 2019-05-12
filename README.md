@@ -7,7 +7,7 @@ Le BGE permet de faire varier les éclairage et leur couleurs, de le faire bouge
 
 Par contre, le BGE ne permet une sortie d'image qu'en png. Il faut les convertir en jpg et les flouter en convolutionnel.
  
-<img src="/doc/shot_106_y.png" width="400" height="400"><img src="chart_avec_blur_sub_16_9000.png" width="400" height="400">
+<img src="/doc/shot_106_y.png" width="400" height="400"><img src="/result_avec_blur_sub_16_9000/chart_avec_blur_sub_16_9000.png" width="400" height="400">
 
 
 ### Contexte
