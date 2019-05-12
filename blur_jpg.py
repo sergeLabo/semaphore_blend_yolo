@@ -11,8 +11,8 @@ from pymultilame import MyTools
 
 def blur_jpg():
     mt = MyTools()
-    shot_dir = '/media/data/3D/projets/semaphore_blend_yolo/shot_jpg'
-    all_jpg_files = mt.get_all_files_list(shot_dir, '.jpg')
+    shot_dir = '/media/data/3D/projets/semaphore_blend_yolo/shot_png_last'
+    all_jpg_files = mt.get_all_files_list(shot_dir, '.png')
     print(len(all_jpg_files))
 
     shot_jpg_blur = '/media/data/3D/projets/semaphore_blend_yolo/shot_jpg_blur'
@@ -47,7 +47,7 @@ def blur_jpg():
         if k != 0:
             img = cv2.blur(img, (k, k))
         # Ecriture
-        cv2.imwrite(name, img, [int(cv2.IMWRITE_JPEG_QUALITY), 90])
+        cv2.imwrite(name, img, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
 
 
     

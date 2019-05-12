@@ -122,16 +122,18 @@ def get_M_position_in_cam_output_in_pixels(M):
 def set_sun_color_energy():
 
     # 0.110 de face
-    gl.sun[0].energy = uniform(0.05, 0.2)
+    gl.sun[0].energy = uniform(0.01, 0.3)
     # 1.34 main
-    gl.sun[1].energy = uniform(1.5, 2.2)
+    gl.sun[1].energy = uniform(1.0, 2.2)
     # 1 lampe back
-    gl.sun[2].energy = uniform(0.5, 1.3)
+    gl.sun[2].energy = uniform(0.2, 1.3)
     # 1 lampe back
-    gl.sun[3].energy = uniform(0.5, 1.3)
-    
-    color = uniform(0.8, 1), uniform(0.5, 1), uniform(0.8, 1)
+    gl.sun[3].energy = uniform(0.2, 1.3)
+
+    # color 
+    color = uniform(0.7, 1.0), uniform(0.7, 1.0), uniform(0.7, 1.0)
     for i in range(3):
+        #print(gl.sun[i].color)
         gl.sun[i].color = color
     
     
