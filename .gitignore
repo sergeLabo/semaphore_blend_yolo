@@ -14,6 +14,10 @@ shot_rect/
 shot_rect_0/
 video/
 photo/
+shot_png_last/
+shot_jpg_blur_last/
+
+
 
 # Blender
 *.blend1
