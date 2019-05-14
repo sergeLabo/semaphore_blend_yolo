@@ -1,0 +1,48 @@
+ (next mAP calculation at 13500 iterations) 
+ Last accuracy mAP@0.5 = 94.45 % 
+ 12000: 0.139979, 0.119883 avg loss, 0.000010 rate, 6.716624 seconds, 768000 images
+Resizing to initial size: 640 x 640 
+ try to allocate additional workspace_size = 14.75 MB 
+ CUDA allocate done! 
+
+ calculation mAP (mean average precision)...
+6000
+ detections_count = 17161, unique_truth_count = 5987  
+class_id = 0, name = a,  17161   ap = 82.72 % 
+class_id = 1, name = space, 	 ap = 80.00 % 
+class_id = 2, name = b, 	 ap = 100.00 % 
+class_id = 3, name = c, 	 ap = 94.55 % 
+class_id = 4, name = d, 	 ap = 100.00 % 
+class_id = 5, name = e, 	 ap = 79.73 % 
+class_id = 6, name = f, 	 ap = 100.00 % 
+class_id = 7, name = g, 	 ap = 88.52 % 
+class_id = 8, name = h, 	 ap = 99.72 % 
+class_id = 9, name = i, 	 ap = 94.52 % 
+class_id = 10, name = j, 	 ap = 99.88 % 
+class_id = 11, name = k, 	 ap = 97.39 % 
+class_id = 12, name = l, 	 ap = 96.58 % 
+class_id = 13, name = m, 	 ap = 100.00 % 
+class_id = 14, name = n, 	 ap = 93.39 % 
+class_id = 15, name = o, 	 ap = 98.15 % 
+class_id = 16, name = p, 	 ap = 94.77 % 
+class_id = 17, name = q, 	 ap = 97.96 % 
+class_id = 18, name = r, 	 ap = 100.00 % 
+class_id = 19, name = s, 	 ap = 97.23 % 
+class_id = 20, name = t, 	 ap = 81.34 % 
+class_id = 21, name = u, 	 ap = 98.94 % 
+class_id = 22, name = v, 	 ap = 65.49 % 
+class_id = 23, name = w, 	 ap = 98.84 % 
+class_id = 24, name = x, 	 ap = 88.67 % 
+class_id = 25, name = y, 	 ap = 99.96 % 
+class_id = 26, name = z, 	 ap = 81.75 % 
+ for thresh = 0.25, precision = 0.94, recall = 0.86, F1-score = 0.90 
+ for thresh = 0.25, TP = 5175, FP = 343, FN = 812, average IoU = 82.32 % 
+
+ IoU threshold = 50 % 
+ mean average precision (mAP@0.50) = 0.929660, or 92.97 % 
+Total Detection Time: 388.000000 Seconds
+
+ mean_average_precision (mAP@0.5) = 0.929660 
+Saving weights to blend_jpg_100_variation_forte_12000/backup/yolov3_blend_big_var_12000.weights
+Saving weights to blend_jpg_100_variation_forte_12000/backup/yolov3_blend_big_var_last.weights
+Saving weights to blend_jpg_100_variation_forte_12000/backup/yolov3_blend_big_var_final.weights

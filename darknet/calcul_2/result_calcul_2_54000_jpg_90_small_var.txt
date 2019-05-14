@@ -1,0 +1,54 @@
+ (next mAP calculation at 56250 iterations)
+ Last accuracy mAP@0.5 = 98.14 %
+ 54000: 0.031320, 0.041310 avg loss, 0.000010 rate, 2.031348 seconds, 3456000 images
+Resizing to initial size: 640 x 640
+ try to allocate additional workspace_size = 52.43 MB
+ CUDA allocate done!
+
+ calculation mAP (mean average precision)...
+6000
+ detections_count = 9682, unique_truth_count = 5987
+class_id = 0, name = a, ap = 97.65%   	 (TP = 232, FP = 118)
+class_id = 1, name = space, ap = 91.08%   	 (TP = 152, FP = 0)
+class_id = 2, name = b, ap = 99.55%   	 (TP = 220, FP = 0)
+class_id = 3, name = c, ap = 97.35%   	 (TP = 227, FP = 40)
+class_id = 4, name = d, ap = 100.00%   	 (TP = 218, FP = 0)
+class_id = 5, name = e, ap = 94.33%   	 (TP = 215, FP = 0)
+class_id = 6, name = f, ap = 100.00%   	 (TP = 212, FP = 0)
+class_id = 7, name = g, ap = 96.39%   	 (TP = 207, FP = 0)
+class_id = 8, name = h, ap = 100.00%   	 (TP = 219, FP = 0)
+class_id = 9, name = i, ap = 97.12%   	 (TP = 205, FP = 61)
+class_id = 10, name = j, ap = 100.00%   	 (TP = 228, FP = 0)
+class_id = 11, name = k, ap = 100.00%   	 (TP = 241, FP = 0)
+class_id = 12, name = l, ap = 99.25%   	 (TP = 180, FP = 3)
+class_id = 13, name = m, ap = 98.64%   	 (TP = 218, FP = 0)
+class_id = 14, name = n, ap = 98.89%   	 (TP = 218, FP = 96)
+class_id = 15, name = o, ap = 99.58%   	 (TP = 237, FP = 18)
+class_id = 16, name = p, ap = 97.62%   	 (TP = 220, FP = 58)
+class_id = 17, name = q, ap = 100.00%   	 (TP = 207, FP = 35)
+class_id = 18, name = r, ap = 100.00%   	 (TP = 195, FP = 0)
+class_id = 19, name = s, ap = 99.57%   	 (TP = 229, FP = 57)
+class_id = 20, name = t, ap = 91.33%   	 (TP = 215, FP = 138)
+class_id = 21, name = u, ap = 99.99%   	 (TP = 213, FP = 6)
+class_id = 22, name = v, ap = 97.73%   	 (TP = 180, FP = 0)
+class_id = 23, name = w, ap = 99.99%   	 (TP = 235, FP = 15)
+class_id = 24, name = x, ap = 97.32%   	 (TP = 177, FP = 0)
+class_id = 25, name = y, ap = 99.55%   	 (TP = 223, FP = 0)
+class_id = 26, name = z, ap = 97.29%   	 (TP = 199, FP = 10)
+
+ for thresh = 0.25, precision = 0.90, recall = 0.96, F1-score = 0.93
+ for thresh = 0.25, TP = 5722, FP = 655, FN = 265, average IoU = 83.17 %
+
+ IoU threshold = 50 %, used Area-Under-Curve for each unique Recall
+ mean average precision (mAP@0.50) = 0.981556, or 98.16 %
+Total Detection Time: 77.000000 Seconds
+
+Set -points flag:
+ `-points 101` for MS COCO
+ `-points 11` for PascalVOC 2007 (uncomment `difficult` in voc.data)
+ `-points 0` (AUC) for ImageNet, PascalVOC 2010-2012, your custom dataset
+
+ mean_average_precision (mAP@0.5) = 0.981556
+Saving weights to blend/backup/yolov3-obj_3l_blend_54000.weights
+Saving weights to blend/backup/yolov3-obj_3l_blend_last.weights
+Saving weights to blend/backup/yolov3-obj_3l_blend_final.weights
