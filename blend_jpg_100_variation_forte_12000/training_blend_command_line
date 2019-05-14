@@ -1,6 +1,0 @@
-
-export PATH=/usr/local/cuda-10.0/bin${PATH:+:${PATH}}
-
-./darknet detector train blend/obj.data blend/yolov3_blend_big_var.cfg darknet53.conv.74 -map
-
-

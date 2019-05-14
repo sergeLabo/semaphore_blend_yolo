@@ -1,5 +1,0 @@
-classes= 27
-train  = blend/train.txt  
-valid  = blend/test.txt  
-names = blend/obj.names  
-backup = blend/backup
