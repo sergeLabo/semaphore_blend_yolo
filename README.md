@@ -1,4 +1,4 @@
-# semaphore blend yolo
+# Semaphore Blend Yolo
 
 Un sémaphore a été construit dans le monde réél avec des pièces réalisées sur Imprimante 3D.
 Ce projet crée ce même sémaphore dans le Blender Game Engine donc dans un monde virtuel. Ce sémaphore est parfait.
