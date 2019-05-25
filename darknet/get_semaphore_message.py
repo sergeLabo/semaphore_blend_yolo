@@ -138,7 +138,7 @@ class YOLO:
                 image = frame_read
 
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            image = cv2.resize(image, (1000, 1000),
+            image = cv2.resize(image, (900, 900),
                                interpolation=cv2.INTER_LINEAR)
             cv2.imshow('Demo', image)
 
@@ -164,8 +164,8 @@ class YOLO:
             msg_img = put_text(msg_img, self.msg, (20, 150))
             cv2.imshow('Message', msg_img)
 
-            print("FPS =", round(1/(time.time()-prev_time), 2),
-                  "    Lettre lue", tag, confiance)
+            # ~ print("FPS =", round(1/(time.time()-prev_time), 2),
+                  # ~ "    Lettre lue", tag, confiance)
 
             # Echap et attente
             k = cv2.waitKey(3)
@@ -251,5 +251,5 @@ if __name__ == "__main__":
     apply_all_cam_settings(conf["HD5000"], cam=0)
 
     # cam = numéro de cam, calcul=1 ou 2 ou 3 voir wiki
-    yolo = YOLO(cam=2, calcul=3)
+    yolo = YOLO(cam=0, calcul=2)
     yolo.detect()
