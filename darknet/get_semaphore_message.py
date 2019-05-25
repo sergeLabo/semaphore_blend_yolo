@@ -63,16 +63,21 @@ class PileFIFO:
 
 class YOLO:
 
-    def __init__(self, cam):
+    def __init__(self, cam, calcul):
 
-        # ~ configPath = "./axe/yolov3-obj_3l_labo_axe.cfg"
-        # ~ weightPath = "./axe/yolov3-labo_axe_final.weights"
-        # ~ metaPath = "./axe/obj.data"
-
-        configPath = "/media/data/projets/darknet/blend/yolov3-obj_3l_blend.cfg"
-        weightPath = "/media/data/projets/darknet/blend/yolov3-obj_3l_blend_avec_blur_final.weights"
-        metaPath = "/media/data/projets/darknet/blend/obj.data"
-
+        if calcul == 1:
+            configPath = "./calcul_1/calcul_1_9000_jpg_90_small_var.cfg"
+            weightPath = "./calcul_1/calcul_1_9000_jpg_90_small_var.weights"
+            metaPath   = "./calcul_1/obj.data"
+        if calcul == 2:
+            configPath = "./calcul_2/calcul_2_54000_jpg_90_small_var.cfg"
+            weightPath = "./calcul_2/calcul_2_54000_jpg_90_small_var.weights"
+            metaPath   = "./calcul_2/obj.data"
+        if calcul == 3:
+            configPath = "./calcul_3/calcul_3_12000_jpg_100_big_var.cfg"
+            weightPath = "./calcul_3/calcul_3_12000_jpg_100_big_var.weights"
+            metaPath   = "./calcul_3/obj.data"
+            
         self.netMain = darknet.load_net_custom(configPath.encode("ascii"),
                                                 weightPath.encode("ascii"),
                                                 0,
@@ -245,5 +250,6 @@ if __name__ == "__main__":
     conf = cf.conf
     apply_all_cam_settings(conf["HD5000"], cam=0)
 
-    yolo = YOLO(0)
+    # cam = numéro de cam, calcul=1 ou 2 ou 3 voir wiki
+    yolo = YOLO(cam=2, calcul=3)
     yolo.detect()
