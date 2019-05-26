@@ -6,7 +6,7 @@ Cela permet d'obtenir 60 000 images pour l'apprentissage et le test de l'intelli
 Le BGE permet de faire varier les éclairage et leur couleurs, de le faire bouger et donner du random sur les angles des bras.
 
 Par contre, le BGE ne permet une sortie d'image qu'en png. Il faut les convertir en jpg et les flouter en convolutionnel.
- 
+
 <img src="/doc/shot_106_y.png" width="400" height="400"><img src="/darknet/calcul_3/chart_big_var_12000.png" width="400" height="400">
 
 
@@ -31,12 +31,28 @@ Réalisé avec:
 Les images ne sont pas dans ce dépôt.
 
 ### Installation
+Après installation, ne jamais faire les mises à jour système: ça casserai libcudnn7=7.4.1.5-1+cuda10.0
+
+Pour faire les mises à jour, il faudrait d'abord bloquer les versions de cuda et cudnn, y compris les dev.
+
+#### Installation complète
+
+* [Installation de CUDA 10.0 sur Xubuntu 18.04](https://ressources.labomedia.org/y/yolo_darknet_sur_un_portable_optimus#installation_de_cuda_100_sur_xubuntu_1804)
+* [Installation de YOLO Darknet](https://ressources.labomedia.org/y/yolo_darknet_sur_un_portable_optimus#installation_de_yolo_darknet)
 
 #### pip3
 
 ~~~text
 sudo apt install python3-pip
 ~~~
+
+#### Modules python
+
+~~~text
+sudo pip3 install numpy scikit-image
+~~~
+
+Pour python-opencv, voir [Installation de CUDA 10.0 sur Xubuntu 18.04](https://ressources.labomedia.org/y/yolo_darknet_sur_un_portable_optimus#installation_de_cuda_100_sur_xubuntu_1804)
 
 #### pymultilame
 

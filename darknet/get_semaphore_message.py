@@ -58,6 +58,7 @@ class PileFIFO:
         set() supprime les éléments en double
         si pas de doublons, on trouve 1 !
         """
+
         if len(set(self.queue)) == 1:
             if self.queue[0] is not None:
                 return self.queue[0]
@@ -70,7 +71,7 @@ class PileFIFO:
 class YOLO:
     """Reset du message avec espace"""
 
-    def __init__(self, cam, calcul, conf):
+    def __init__(self, cam, calcul, conf, thresh=0.5, hier_thresh=0.5, nms=0.45):
         """cam = numéro de cam
         calcul = 1 ou 2 ou 3 (2 semble le meilleur)
         pile = environ le FPS, une lettre doit être maintenus 1 seconde pour
@@ -143,9 +144,18 @@ class YOLO:
         self.msg = ""
 
         # Pile de 25
-        self.tags_pile = PileFIFO(self.pile_size)
+        self.create_pile()
         self.new = 0
         self.loop = 1
+
+        # Paramêtres de detections
+        self.thresh = thresh
+        self.hier_thresh = hier_thresh
+        self.nms = nms
+
+    def create_pile(self):
+        self.lettres_pile = PileFIFO(self.pile_size)
+        print("Création d'une pile FIFO de:", self.pile_size)
 
     def create_trackbar(self):
         """
@@ -253,6 +263,7 @@ class YOLO:
         if pile_size == 0: pile_size = 1
         self.pile_size = pile_size
         self.save_change('pile', 'size', pile_size)
+        self.create_pile()
 
     def save_change(self, section, key, value):
 
@@ -275,7 +286,6 @@ class YOLO:
             self.backlight_compensation = cv2.getTrackbarPos('backlight_compensation','Reglage')
             self.pile_size = cv2.getTrackbarPos('pile_size','Reglage')
 
-            prev_time = time.time()
             ret, frame_read = self.cap.read()
             frame_rgb = cv2.cvtColor(frame_read, cv2.COLOR_BGR2RGB)
 
@@ -288,7 +298,13 @@ class YOLO:
                                         interpolation=cv2.INTER_LINEAR)
 
             darknet.copy_image_from_bytes(self.darknet_image, frame_resized.tobytes())
-            detections, tag, confiance = darknet.detect_image(self.netMain, self.metaMain, self.darknet_image)
+            # detect_image(net, meta, im, thresh=0.5, hier_thresh=0.5, nms=0.45, debug=False)
+            detections, tag, confiance = darknet.detect_image(self.netMain,
+                                                              self.metaMain,
+                                                              self.darknet_image,
+                                                              self.thresh,
+                                                              self.hier_thresh,
+                                                              self.nms)
 
             try:
                 image = cvDrawBoxes(detections, frame_resized)
@@ -296,13 +312,11 @@ class YOLO:
                 image = frame_read
 
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-            image = cv2.resize(image, (900, 900),
-                               interpolation=cv2.INTER_LINEAR)
+            image = cv2.resize(image, (900, 900), interpolation=cv2.INTER_LINEAR)
 
-            # tags
-            self.tags_pile.append(tag)
-            lettre = self.tags_pile.all_identical()
-
+            # Lettre lue
+            self.lettres_pile.append(tag)
+            lettre = self.lettres_pile.all_identical()
             if lettre is not None:
                 if not self.new:
                     if lettre == "space":
@@ -358,7 +372,7 @@ def put_text(img, text, xy):
                      (xy[0], xy[1]),
                      cv2.FONT_HERSHEY_SIMPLEX,
                      1.0,
-                     [0, 255, 0],
+                     [255, 0, 0],
                      2)
     return img
 
@@ -429,5 +443,5 @@ if __name__ == "__main__":
     apply_all_cam_settings(conf["HD5000"], cam)
 
     # cam = numéro de cam, calcul=1 ou 2 ou 3 voir wiki
-    yolo = YOLO(cam, calcul, cf)
+    yolo = YOLO(cam, calcul, cf, thresh=0.5, hier_thresh=0.5, nms=0.45)
     yolo.detect()
