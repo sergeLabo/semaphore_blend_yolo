@@ -71,10 +71,6 @@ sudo pip3 install --upgrade git+https://github.com/sergeLabo/pymultilame.git#egg
 sudo apt install blender
 ~~~
 
-#### Xubunutu 18.04 et CUDA 10
-
-[Installation de CUDA](https://ressources.labomedia.org/y/yolo_darknet_sur_un_portable_optimus)
-
 ### Utilisation
 
 Important: Ne pas déplacer ou agrandir la fenêtre de Blender pendant que les
@@ -94,6 +90,14 @@ Le calculateur avec carte 1060 GTX plante au bout d'une heure avec des png.
 Avec blur_jpg.py, en modifiant les chemins.
 
 Le flou est important (0 à 5), enregistrées en jpg 90%. Des images parfaites ne conviennent pas du tout pour l'apprentissage.
+
+### Lecture d'un message avec un vrai sémaphore
+
+Vous devez d'abord construire un vrai sémaphore !
+
+Les fichiers nécessaires sont dans le dossier semaphore_blend_yolo/darknet
+
+A finir !!!
 
 
 ### Merci à:
