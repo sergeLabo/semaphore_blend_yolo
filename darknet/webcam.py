@@ -140,7 +140,7 @@ CAM_PARAM = [
 
 
 def apply_all_cam_settings(cf, cam):
-    '''Apply all settings on cam.'''
+    """Apply all settings on cam."""
 
     # List of all cam settings, disable auto settings first
     # An item is a tuple, ("uvcdynctrl parameter name", "variable in scan.ini")
@@ -151,11 +151,18 @@ def apply_all_cam_settings(cf, cam):
         sleep(0.1)
 
 def apply_cam_setting(cam, name, value):
-    '''Apply only one setting on cam.'''
+    """Apply only one setting on cam.
+    ["Brightness", "brightness"]
+    avec "brightness", j'applique "Brightness"
+    """
+    for item in CAM_PARAM:
+        if item[1] == name:
+            correct_name = item[0]
 
     subprocess.call('uvcdynctrl -d video"{0}" -s  "{1}" {2}'.format(cam,
-                                                name, value), shell=True)
-    print("Cam{0} settings: {1} = {2}".format(cam, name, value))
+                                                correct_name, value), shell=True)
+    print("Cam{0} settings: {1} = {2}".format(cam, correct_name, value))
+
 
 if __name__ == '__main__':
     dossier = os.getcwd()
