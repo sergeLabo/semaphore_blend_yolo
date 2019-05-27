@@ -424,18 +424,51 @@ if __name__ == "__main__":
         cam = int(sys.argv[1])
     except:
         print("Le 1er argument est le numéro de webcam")
-
+    if cam not in [0,1,2,3,4,5,6]:
+        print("Le 1er argument est le numéro de webcam")
+        print("Le numéro de cam est 0 ou 1 ou 2 ou 3 ou 4 ou 5 ou 6")
+        
     try:
         calcul = int(sys.argv[2])
     except:
         print("Le 2ème argument est le choix du calcul")
         print("Les valeurs possibles sont 1 ou 2 ou 3")
-
     if calcul not in [1, 2, 3]:
         print("Le 2ème argument est le choix du calcul")
         print("Les valeurs possibles sont 1 ou 2 ou 3")
 
-    print("Camera:", cam, "Calcul:", calcul)
+    try:
+        thresh = float(sys.argv[3])
+    except:
+        print("Le 3ème argument est thresh")
+        print("Les valeurs possibles sont entre 0 et 1")
+    if 0 <= thresh >= 1:
+        print("Le 3ème argument est thresh")
+        print("Les valeurs possibles sont entre 0 et 1")
+
+    try:
+        hier_thresh = float(sys.argv[4])
+    except:
+        print("Le 4ème argument est hier_thresh")
+        print("Les valeurs possibles sont entre 0 et 1")
+    if 0 <= hier_thresh >= 1:
+        print("Le 4ème argument est hier_thresh")
+        print("Les valeurs possibles sont entre 0 et 1")
+
+    try:
+        nms = float(sys.argv[5])
+    except:
+        print("Le 5ème argument est nms")
+        print("Les valeurs possibles sont entre 0 et 1")
+    if 0 <= nms >= 1:
+        print("Le 5ème argument est nms")
+        print("Les valeurs possibles sont entre 0 et 1")
+
+    print(  "Camera:", cam, "\n",
+            "Calcul:", calcul, "\n",
+            "thresh", thresh, "\n",
+            "hier_thresh", hier_thresh, "\n",
+            "nms", nms)
 
     dossier = os.getcwd()
     cf = MyConfig(dossier + "/darknet.ini")
@@ -443,5 +476,5 @@ if __name__ == "__main__":
     apply_all_cam_settings(conf["HD5000"], cam)
 
     # cam = numéro de cam, calcul=1 ou 2 ou 3 voir wiki
-    yolo = YOLO(cam, calcul, cf, thresh=0.5, hier_thresh=0.5, nms=0.45)
+    yolo = YOLO(cam, calcul, cf, thresh, hier_thresh, nms)
     yolo.detect()
