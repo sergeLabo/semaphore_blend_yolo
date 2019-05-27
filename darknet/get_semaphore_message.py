@@ -442,7 +442,7 @@ if __name__ == "__main__":
     except:
         print("Le 3ème argument est thresh")
         print("Les valeurs possibles sont entre 0 et 1")
-    if 0 <= thresh >= 1:
+    if 0 < thresh > 1:
         print("Le 3ème argument est thresh")
         print("Les valeurs possibles sont entre 0 et 1")
 
@@ -451,7 +451,7 @@ if __name__ == "__main__":
     except:
         print("Le 4ème argument est hier_thresh")
         print("Les valeurs possibles sont entre 0 et 1")
-    if 0 <= hier_thresh >= 1:
+    if 0 < hier_thresh > 1:
         print("Le 4ème argument est hier_thresh")
         print("Les valeurs possibles sont entre 0 et 1")
 
@@ -460,7 +460,7 @@ if __name__ == "__main__":
     except:
         print("Le 5ème argument est nms")
         print("Les valeurs possibles sont entre 0 et 1")
-    if 0 <= nms >= 1:
+    if 0 < nms > 1:
         print("Le 5ème argument est nms")
         print("Les valeurs possibles sont entre 0 et 1")
 
