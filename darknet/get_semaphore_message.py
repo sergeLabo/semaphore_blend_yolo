@@ -71,7 +71,7 @@ class PileFIFO:
 class YOLO:
     """Reset du message avec espace"""
 
-    def __init__(self, cam, calcul, conf, thresh=0.5, hier_thresh=0.5, nms=0.45):
+    def __init__(self, cam, calcul, conf):
         """cam = numéro de cam
         calcul = 1 ou 2 ou 3 (2 semble le meilleur)
         pile = environ le FPS, une lettre doit être maintenus 1 seconde pour
@@ -133,6 +133,11 @@ class YOLO:
         self.white_bal_temp = self.cf.conf['HD5000']['white_bal_temp']
         self.backlight_compensation = self.cf.conf['HD5000']['backlight_compensation']
 
+        # Paramètres de detections
+        self.thresh = self.cf.conf['darknet']['thresh']
+        self.hier_thresh = self.cf.conf['darknet']['hier_thresh']
+        self.nms = self.cf.conf['darknet']['nms']
+
         # Trackbars
         self.create_trackbar()
         self.set_init_tackbar_position()
@@ -147,11 +152,6 @@ class YOLO:
         self.create_pile()
         self.new = 0
         self.loop = 1
-
-        # Paramêtres de detections
-        self.thresh = thresh
-        self.hier_thresh = hier_thresh
-        self.nms = nms
 
     def create_pile(self):
         self.lettres_pile = PileFIFO(self.pile_size)
@@ -169,11 +169,14 @@ class YOLO:
         white_bal_temp    min=2800 max=10000
         backlight_compensation min=0 max=10 step=1
         pile_size         min=1 max=60 step=1
+        thresh            min 0 max 1
+        hier_thresh       min 0 max 1
+        nms               min 0 max 1
         """
         cv2.namedWindow('Reglage')
         self.reglage_img = np.zeros((10, 1000, 3), np.uint8)
 
-        cv2.createTrackbar('brightness', 'Reglage', 30, 255, self.onChange_brightness)
+        cv2.createTrackbar('brightness', 'Reglage', 0, 255, self.onChange_brightness)
         cv2.createTrackbar('contrast', 'Reglage', 0, 10, self.onChange_contrast)
         cv2.createTrackbar('saturation', 'Reglage', 0, 200, self.onChange_saturation)
         cv2.createTrackbar('w_bal_temp_aut', 'Reglage', 0, 1, self.onChange_w_bal_temp_aut)
@@ -183,7 +186,11 @@ class YOLO:
         cv2.createTrackbar('exposure_auto', 'Reglage', 0, 3, self.onChange_exposure_auto)
         cv2.createTrackbar('exposure_absolute', 'Reglage', 5, 20000, self.onChange_exposure_absolute)
 
-        cv2.createTrackbar('pile_size', 'Reglage', 1, 60, self.onChange_pile_size)
+        cv2.createTrackbar('threshold', 'Reglage', 0, 100, self.onChange_thresh)
+        # ~ cv2.createTrackbar('hier_thresh', 'Reglage', 0, 100, self.onChange_hier_thresh)
+        # ~ cv2.createTrackbar('nms', 'Reglage', 0, 100, self.onChange_nms)
+
+        cv2.createTrackbar('pile_size', 'Reglage', 0, 60, self.onChange_pile_size)
 
     def set_init_tackbar_position(self):
         """setTrackbarPos(trackbarname, winname, pos) -> None"""
@@ -192,12 +199,15 @@ class YOLO:
         cv2.setTrackbarPos('saturation', 'Reglage', self.saturation)
         cv2.setTrackbarPos('exposure_auto', 'Reglage', self.exposure_auto)
         cv2.setTrackbarPos('exposure_absolute', 'Reglage', self.exposure_absolute)
-
         cv2.setTrackbarPos('contrast', 'Reglage', self.contrast)
         cv2.setTrackbarPos('w_bal_temp_aut', 'Reglage', self.w_bal_temp_aut)
         cv2.setTrackbarPos('power_line_freq', 'Reglage', self.power_line_freq)
         cv2.setTrackbarPos('white_bal_temp', 'Reglage', self.white_bal_temp)
         cv2.setTrackbarPos('backlight_compensation', 'Reglage', self.backlight_compensation)
+
+        cv2.setTrackbarPos('threshold', 'Reglage', self.thresh)
+        # ~ cv2.setTrackbarPos('hier_thresh', 'Reglage', self.hier_thresh)
+        # ~ cv2.setTrackbarPos('nms', 'Reglage', self.nms)
 
         cv2.setTrackbarPos('pile_size', 'Reglage', self.pile_size)
 
@@ -257,11 +267,32 @@ class YOLO:
         self.backlight_compensation = backlight_compensation
         self.save_change('HD5000', 'backlight_compensation', backlight_compensation)
 
+    def onChange_thresh(self, thresh):
+        """min=1 max=100 step=1 default=0.5"""
+        if thresh == 0: thresh = 5
+        if thresh == 100: thresh = 95
+        self.thresh = int(thresh)
+        self.save_change('darknet', 'thresh', self.thresh)
+
+    def onChange_hier_thresh(self, hier_thresh):
+        """min=1 max=100 step=1 default=0.5"""
+        if hier_thresh == 0: hier_thresh = 5
+        if hier_thresh == 100: hier_thresh = 95
+        self.hier_thresh = int(hier_thresh)
+        self.save_change('darknet', 'hier_thresh', self.hier_thresh)
+
+    def onChange_nms(self, nms):
+        """min=1 max=100 step=1 default=0.5"""
+        if nms == 0: nms = 5
+        if nms == 100: nms = 95
+        self.nms = int(nms)
+        self.save_change('darknet', 'nms', self.nms)
+
     def onChange_pile_size(self, pile_size):
         """min=1 max 60
         """
         if pile_size == 0: pile_size = 1
-        self.pile_size = pile_size
+        self.pile_size = int(pile_size)
         self.save_change('pile', 'size', pile_size)
         self.create_pile()
 
@@ -284,6 +315,9 @@ class YOLO:
             self.power_line_freq = cv2.getTrackbarPos('power_line_freq','Reglage')
             self.white_bal_temp = cv2.getTrackbarPos('white_bal_temp','Reglage')
             self.backlight_compensation = cv2.getTrackbarPos('backlight_compensation','Reglage')
+            self.thresh = cv2.getTrackbarPos('threshold','Reglage')
+            # ~ self.hier_thresh = cv2.getTrackbarPos('hier_thresh','Reglage')
+            # ~ self.nms = cv2.getTrackbarPos('nms','Reglage')
             self.pile_size = cv2.getTrackbarPos('pile_size','Reglage')
 
             ret, frame_read = self.cap.read()
@@ -302,9 +336,9 @@ class YOLO:
             detections, tag, confiance = darknet.detect_image(self.netMain,
                                                               self.metaMain,
                                                               self.darknet_image,
-                                                              self.thresh,
-                                                              self.hier_thresh,
-                                                              self.nms)
+                                                              self.thresh/100,
+                                                              self.hier_thresh/100,
+                                                              self.nms/100)
 
             try:
                 image = cvDrawBoxes(detections, frame_resized)
@@ -326,18 +360,27 @@ class YOLO:
             else:
                 self.new = 0
 
-            # A la ligne, tous les ln charactères
-            ln = 80
-            self.msg = textwrap.fill(self.msg, ln)
+            # Rafraichissement du message
+            if len(self.msg) > 100:
+               self.msg = ""
 
-            # Affichage des trackbars
-            cv2.imshow('Reglage', self.reglage_img)
+            # A la ligne, tous les ln charactères
+            ln = 20
+            msg = textwrap.fill(self.msg, ln)
+            msg = msg.splitlines()
 
             # Affichage du message
-            msg_img = put_text(image, "Message:", (20, 25))
-            msg_img = put_text(image, self.msg, (20, 150))
+            put_text(image, "Message:", (20, 45))
+            for i in range(len(msg)):
+                y = int(105 + 50*i)
+                put_text(image, msg[i], (20, y))
 
-            cv2.imshow('Demo', image)
+            put_text(image, "Espace: reset du message", (20, 870))
+
+            # Affichage du Semaphore
+            cv2.imshow('Semaphore', image)
+            # Affichage des trackbars
+            cv2.imshow('Reglage', self.reglage_img)
 
             # Attente
             k = cv2.waitKey(3)
@@ -367,14 +410,14 @@ def put_text(img, text, xy):
     cv.putText(img, 'OpenCV', (10, 500), font, 4, (255,255,255), 2, cv.LINE_AA)
     """
 
-    img = cv2.putText(img,
-                     text,
-                     (xy[0], xy[1]),
-                     cv2.FONT_HERSHEY_SIMPLEX,
-                     1.0,
-                     [255, 0, 0],
-                     2)
-    return img
+    cv2.putText(img,
+                text,
+                (xy[0], xy[1]),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                2.0,
+                [255, 0, 0],
+                2,
+                cv2.LINE_AA)
 
 
 def convertBack(x, y, w, h):
@@ -427,7 +470,7 @@ if __name__ == "__main__":
     if cam not in [0,1,2,3,4,5,6]:
         print("Le 1er argument est le numéro de webcam")
         print("Le numéro de cam est 0 ou 1 ou 2 ou 3 ou 4 ou 5 ou 6")
-        
+
     try:
         calcul = int(sys.argv[2])
     except:
@@ -437,38 +480,8 @@ if __name__ == "__main__":
         print("Le 2ème argument est le choix du calcul")
         print("Les valeurs possibles sont 1 ou 2 ou 3")
 
-    try:
-        thresh = float(sys.argv[3])
-    except:
-        print("Le 3ème argument est thresh")
-        print("Les valeurs possibles sont entre 0 et 1")
-    if 0 < thresh > 1:
-        print("Le 3ème argument est thresh")
-        print("Les valeurs possibles sont entre 0 et 1")
-
-    try:
-        hier_thresh = float(sys.argv[4])
-    except:
-        print("Le 4ème argument est hier_thresh")
-        print("Les valeurs possibles sont entre 0 et 1")
-    if 0 < hier_thresh > 1:
-        print("Le 4ème argument est hier_thresh")
-        print("Les valeurs possibles sont entre 0 et 1")
-
-    try:
-        nms = float(sys.argv[5])
-    except:
-        print("Le 5ème argument est nms")
-        print("Les valeurs possibles sont entre 0 et 1")
-    if 0 < nms > 1:
-        print("Le 5ème argument est nms")
-        print("Les valeurs possibles sont entre 0 et 1")
-
     print(  "Camera:", cam, "\n",
-            "Calcul:", calcul, "\n",
-            "thresh", thresh, "\n",
-            "hier_thresh", hier_thresh, "\n",
-            "nms", nms)
+            "Calcul:", calcul, "\n")
 
     dossier = os.getcwd()
     cf = MyConfig(dossier + "/darknet.ini")
@@ -476,5 +489,5 @@ if __name__ == "__main__":
     apply_all_cam_settings(conf["HD5000"], cam)
 
     # cam = numéro de cam, calcul=1 ou 2 ou 3 voir wiki
-    yolo = YOLO(cam, calcul, cf, thresh, hier_thresh, nms)
+    yolo = YOLO(cam, calcul, cf)
     yolo.detect()
