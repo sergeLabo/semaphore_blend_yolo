@@ -66,6 +66,15 @@ def get_conf():
 
 
 def set_variable():
+    # mode create_shot ou display message
+    gl.mode = "message"
+    gl.two = 1
+    gl.one = 0
+    gl.enter = 0
+    gl.backspace = 0
+    gl.captured_text = ""
+    gl.captured_lettre = 0
+    
     # Image vide: 1 tous les 270
     gl.empty = 0
     gl.empty_every = int(gl.conf['blend']['empty_every'])
@@ -133,7 +142,8 @@ def create_directories():
 
 def set_tempo():
     tempo_liste = [ ("shot", int(gl.conf['blend']['shot_every'])),
-                    ("frame", 99999999999)]
+                    ("frame", 99999999999),
+                    ("display lettre", 120)]
 
     # Comptage des frames par lettre
     gl.tempoDict = Tempo(tempo_liste)

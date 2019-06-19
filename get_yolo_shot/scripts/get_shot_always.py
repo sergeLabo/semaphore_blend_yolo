@@ -19,6 +19,7 @@
 
 """
 Lancé à chaque frame durant tout le jeu.
+Création des images pour l'apprentissage
 """
 
 import os
@@ -41,7 +42,9 @@ LETTRES = list(L)
 def main():
     # Avance de la video
     video_refresh()
-
+    # Shot ou message
+    mode()
+    
     if gl.numero % gl.empty_every == 0:
         gl.empty = 1
     else:
@@ -84,6 +87,17 @@ def main():
     gl.tempoDict.update()
 
 
+def mode():
+
+    if gl.keyboard.events[events.PAGEDOWNKEY] == gl.KX_INPUT_JUST_ACTIVATED:
+        # Page down pour message
+        gl.mode = "shot"
+        
+    if gl.keyboard.events[events.PAGEUPKEY] == gl.KX_INPUT_JUST_ACTIVATED:
+        # Page up pour shot
+        gl.mode = "message"
+
+    
 def get_M_position_in_cam_output_in_pixels(M):
     """M = [M[0], M[1], M[2]]
     La vue est carrée:
@@ -386,6 +400,7 @@ def video_refresh():
 def end():
     if gl.numero == gl.nombre_shot_total:
         gl.endGame()
+
 
 """    # Si yM = 13.59
     x_cam = demi * (1 + (xM/xB))

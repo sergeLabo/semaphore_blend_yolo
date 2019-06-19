@@ -31,11 +31,16 @@ sans avoir à les recharger dans Blender.
 """
 
 
+from bge import logic as gl
+
 # imports locaux
-from scripts import get_shot_always
+from scripts import get_shot_always, display_message_always
 
 
 def main():
     """Fonction lancée à chaque frame dans blender en temps que module."""
 
-    get_shot_always.main()
+    if gl.mode == "shot":
+        get_shot_always.main()
+    else:
+        display_message_always.main()
