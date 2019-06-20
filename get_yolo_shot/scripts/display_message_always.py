@@ -104,7 +104,7 @@ def message_display():
     print("Affichage de", gl.chars)
     display(gl.chars)
     
-    if gl.tempoDict['display lettre'].tempo == 0:
+    if gl.tempoDict['display lettre'].tempo == 119:
         gl.lettre += 1
         set_sun_color_energy()
 
