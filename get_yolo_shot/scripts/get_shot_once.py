@@ -74,6 +74,7 @@ def set_variable():
     gl.backspace = 0
     gl.captured_text = ""
     gl.captured_lettre = 0
+    gl.angles_previous = 0, 0, 0
     
     # Image vide: 1 tous les 270
     gl.empty = 0
@@ -143,7 +144,7 @@ def create_directories():
 def set_tempo():
     tempo_liste = [ ("shot", int(gl.conf['blend']['shot_every'])),
                     ("frame", 99999999999),
-                    ("display lettre", 120)]
+                    ("display lettre", 180)]
 
     # Comptage des frames par lettre
     gl.tempoDict = Tempo(tempo_liste)

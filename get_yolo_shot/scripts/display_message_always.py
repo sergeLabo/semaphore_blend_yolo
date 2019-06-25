@@ -101,10 +101,10 @@ def message_display():
     """Changement de lettre tous les 120 frames"""
 
     get_chars()
-    print("Affichage de", gl.chars)
+    #print("Affichage de", gl.chars)
     display(gl.chars)
     
-    if gl.tempoDict['display lettre'].tempo == 119:
+    if gl.tempoDict['display lettre'].tempo == 0:
         gl.lettre += 1
         set_sun_color_energy()
 
@@ -134,11 +134,42 @@ def display(chars):
 
 
 def get_angles(chars):
-    try:
-        angles = gl.lettre_table[chars]
-        angles = angles_variation(angles)
+    """ Nouvel angle = 180
+        angle précédent = 0
+        en 60 frame, de 0 à 180 soit (180-0)/60=3
+        angles = tuple de 3 angles
+    """
+
+    try:  # pour \n
+        angles_new = gl.lettre_table[chars]  # tuple de 3
     except:
-        angles = (0, 0, 0)
+        angles_new = 0, 0, 0
+        
+    a, b , c = angles_new
+    t = gl.tempoDict['display lettre'].tempo
+    
+    # Déplacement du bras
+    if t < 60:
+        a = ((a - gl.angles_previous[0])/60) * t + gl.angles_previous[0]
+        b = ((b - gl.angles_previous[1])/60) * t + gl.angles_previous[1]
+        c = ((c - gl.angles_previous[2])/60) * t + gl.angles_previous[2]
+        angles = (a, b, c)
+        
+    # Le bras est arrivé en bonne position
+    if t == 60:
+        gl.angles_previous = angles_new
+        angles = angles_new
+
+    # Le bras est en bonne position
+    if t > 60:
+        angles = angles_new
+        
+    angles = angles_variation(angles)
+    # #print(  "chars", chars,
+            # #"t", t,
+            # #"angles_new", angles_new[0],
+            # #"gl.angles_previous", gl.angles_previous[0],
+            # #"Angles fin", angles[0])
     return angles
 
 
