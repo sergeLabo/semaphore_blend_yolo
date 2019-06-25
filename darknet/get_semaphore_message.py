@@ -71,7 +71,7 @@ class PileFIFO:
 class YOLO:
     """Reset du message avec espace"""
 
-    def __init__(self, cam, calcul, conf):
+    def __init__(self, cam, calcul, cf):
         """cam = numéro de cam
         calcul = 1 ou 2 ou 3 (2 semble le meilleur)
         pile = environ le FPS, une lettre doit être maintenus 1 seconde pour
