@@ -24,8 +24,8 @@ Réalisé avec:
 
 ### La documentation sur ressources.labomedia.org
 
-[Un vrai sémaphore reconnu avec Yolo Darknet](https://ressources.labomedia.org/y/yolo_darknet_avec_un_vrai_semaphore)
-[La reconnaissance sur un Nvidia Jetson Nano](https://ressources.labomedia.org/nvidia_jetson_nano)
+* [Un vrai sémaphore reconnu avec Yolo Darknet](https://ressources.labomedia.org/y/yolo_darknet_avec_un_vrai_semaphore)
+* [La reconnaissance sur un Nvidia Jetson Nano](https://ressources.labomedia.org/nvidia_jetson_nano)
 
 ### Le dossiers des images n'est pas dans ce dépôt.
 
@@ -36,7 +36,9 @@ Réalisé avec:
 
 #### Divers
 uvcdynctrl est utilisé pour régler la caméra en python, et v4l2ucp permet de tester les réglages en temps réel
-  sudo apt install uvcdynctrl v4l2ucp
+~~~~text
+sudo apt install uvcdynctrl v4l2ucp
+~~~~
 
 ### Lecture d'un message avec un vrai sémaphore
 et une webcam Microsoft HD5000
