@@ -16,7 +16,7 @@ video/
 photo/
 shot_png_last/
 shot_jpg_blur_last/
-
+libdarknet.so
 
 # Blender
 *.blend1

@@ -146,7 +146,7 @@ class YOLO:
         self.darknet_image = darknet.make_image(darknet.network_width(self.netMain),
                                                 darknet.network_height(self.netMain),
                                                 3)
-        self.msg = ""
+        self.msg = "Le message: azerty uo q q q d f g h j k l n b v c"
 
         # Pile de 25
         self.create_pile()
@@ -365,17 +365,17 @@ class YOLO:
                self.msg = ""
 
             # A la ligne, tous les ln charactères
-            ln = 20
+            ln = 24
             msg = textwrap.fill(self.msg, ln)
             msg = msg.splitlines()
 
             # Affichage du message
-            put_text(image, "Message:", (20, 45))
+            put_text(image, "Message:", (20, 45), 1, 2)
             for i in range(len(msg)):
                 y = int(105 + 50*i)
-                put_text(image, msg[i], (20, y))
+                put_text(image, msg[i], (20, y), 2, 3)
 
-            put_text(image, "Espace: reset du message", (20, 870))
+            put_text(image, "Espace: reset du message", (20, 870), 1, 2)
 
             # Affichage du Semaphore
             cv2.imshow('Semaphore', image)
@@ -394,7 +394,7 @@ class YOLO:
         self.cap.release()
 
 
-def put_text(img, text, xy):
+def put_text(img, text, xy, size, thickness):
     """
     Adding Text to Images:
         Text data that you want to write
@@ -414,9 +414,9 @@ def put_text(img, text, xy):
                 text,
                 (xy[0], xy[1]),
                 cv2.FONT_HERSHEY_SIMPLEX,
-                2.0,
-                [255, 0, 0],
-                2,
+                size,
+                [0, 255, 255],
+                thickness,
                 cv2.LINE_AA)
 
 
